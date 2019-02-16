@@ -15,6 +15,7 @@ public class CashMachine {
     private AccountData accountData = null;
 
     public CashMachine(Bank bank) {
+
         this.bank = bank;
     }
 
@@ -55,7 +56,22 @@ public class CashMachine {
 
     @Override
     public String toString() {
-        return accountData != null ? accountData.toString() : "Try account 1000 or 2000 and click submit.";
+        return accountData != null ? accountData.toString() : "Try account 1000, 2000, 100 or 200 and click submit.";
+    }
+
+    public String getName() {
+        return accountData != null ? accountData.getName() : "Try account 1000 or 2000, 100 or 200  and click submit.";
+    }
+
+    public String getId() {
+        return accountData != null ? new Integer(accountData.getId()).toString() : "Try account 1000 or 2000, 100 or 200  and click submit.";
+    }
+
+    public String getEmail() {
+        return accountData != null ? accountData.getEmail() : "Try account 1000 or 2000, 100 or 200  and click submit.";
+    }
+    public String getBalance() {
+        return accountData != null ? new Integer(accountData.getBalance()).toString() : "Try account 1000 or 2000, 100 or 200  and click submit.";
     }
 
     private <T> void tryCall(Supplier<ActionResult<T> > action, Consumer<T> postAction) {
