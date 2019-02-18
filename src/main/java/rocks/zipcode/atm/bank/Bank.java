@@ -4,6 +4,7 @@ import rocks.zipcode.atm.ActionResult;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author ZipCodeWilmington
@@ -54,5 +55,17 @@ public class Bank {
         } else {
             return ActionResult.fail("Withdraw failed: " + amount + ". Account has: " + account.getBalance());
         }
+    }
+    public String[] getAccountIDs()
+    {
+        Set accountIDSet = accounts.keySet();
+        String[] accountIds  = new String[accountIDSet.size()];
+        int count = 0;
+        for (Object obj : accountIDSet) {
+            Integer id = (Integer) obj;
+            accountIds[count] = String.valueOf(id);
+            count++;
+        }
+        return accountIds;
     }
 }

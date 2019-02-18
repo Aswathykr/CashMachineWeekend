@@ -13,6 +13,14 @@ public class CashMachine {
 
     private final Bank bank;
     private AccountData accountData = null;
+    private String errorMessage = "";
+    private boolean isSuccess = true;
+    public String getErrorMessage() {
+        if(!isSuccess)
+            return "  " + errorMessage;
+        else
+            return "";
+    }
 
     public CashMachine(Bank bank) {
 
@@ -28,6 +36,10 @@ public class CashMachine {
                 () -> bank.getAccountById(id),
                 update
         );
+    }
+
+    public String[] getAccountIDs(){
+        return bank.getAccountIDs();
     }
 
     public void deposit(int amount) {
@@ -78,10 +90,12 @@ public class CashMachine {
         try {
             ActionResult<T> result = action.get();
             if (result.isSuccess()) {
+                isSuccess = true;
                 T data = result.getData();
                 postAction.accept(data);
             } else {
-                String errorMessage = result.getErrorMessage();
+                isSuccess = false;
+                errorMessage = result.getErrorMessage();
                 throw new RuntimeException(errorMessage);
             }
         } catch (Exception e) {
